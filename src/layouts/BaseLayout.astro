@@ -1,0 +1,71 @@
+---
+const {
+  title = "사이트명",
+  description = "설명",
+  canonical = "http://localhost:4321",
+  ogImage = "/assets/images/logo.png",
+} = Astro.props;
+
+const GA_ID = import.meta.env.PUBLIC_GA_ID; // .env에 넣으면 동작
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Template CSS (실제 존재하는 파일만) -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css" />
+    <link rel="stylesheet" href="/assets/css/owl.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/flex-slider.css" />
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Template JS (public/ 파일은 is:inline 필수) -->
+    <script src="/assets/jquery/jquery.min.js" is:inline></script>
+
+    <!-- 부트스트랩 JS: 템플릿은 bootstrap.min.js를 쓰는 경우가 많음 -->
+    <script src="/assets/bootstrap/js/bootstrap.min.js" is:inline></script>
+
+    <!-- 템플릿 플러그인 --> 
+    <!-- <script src="/assets/js/isotope.min.js" is:inline></script> -->
+    <script src="/assets/js/owl-carousel.js" is:inline></script>
+    <script src="/assets/js/tabs.js" is:inline></script>
+    <script src="/assets/js/popup.js" is:inline></script>
+    <script src="/assets/js/custom.js" is:inline></script>
+
+    {GA_ID ? (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', { anonymize_ip: true });
+          `}
+        </script>
+      </>
+    ) : null}
+  </body>
+</html>

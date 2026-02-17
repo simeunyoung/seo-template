@@ -1,0 +1,21 @@
+---
+const nav = [
+  { href: "/", label: "홈" },
+  { href: "/services", label: "서비스" },
+  { href: "/pricing", label: "가격" },
+  { href: "/gallery", label: "갤러리" },
+  { href: "/reviews", label: "후기" },
+  { href: "/blog", label: "블로그" }, // 나중에 추가해도 됨
+  { href: "/contact", label: "문의" },
+];
+---
+<header>
+  <nav>
+    <a href="/">로고</a>
+    <ul>
+      {nav.map((x) => (
+        <li><a href={x.href}>{x.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
