@@ -2,6 +2,6 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://YOURPROJECT.vercel.app",
+  site: "https://seo-template-eta.vercel.app",
   integrations: [sitemap()],
 });
