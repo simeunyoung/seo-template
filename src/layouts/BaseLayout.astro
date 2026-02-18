@@ -6,7 +6,16 @@ const {
   ogImage = "/assets/images/logo.png",
 } = Astro.props;
 
-const GA_ID = import.meta.env.PUBLIC_GA_ID; // .env에 넣으면 동작
+const GA_ID = import.meta.env.PUBLIC_GA_ID;
+
+const gaInline = GA_ID
+  ? `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}', { anonymize_ip: true });
+`
+  : "";
 ---
 
 <!doctype html>
@@ -53,19 +62,11 @@ const GA_ID = import.meta.env.PUBLIC_GA_ID; // .env에 넣으면 동작
     <script src="/assets/js/tabs.js" is:inline></script>
     <script src="/assets/js/popup.js" is:inline></script>
     <script src="/assets/js/custom.js" is:inline></script>
-
-    {GA_ID ? (
+    {GA_ID && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-        <script is:inline>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_ID}', { anonymize_ip: true });
-          `}
-        </script>
+        <script is:inline set:html={gaInline}></script>
       </>
-    ) : null}
+    )}
   </body>
 </html>
