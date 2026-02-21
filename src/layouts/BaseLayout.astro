@@ -1,5 +1,6 @@
 ---
 import SEO from "../components/SEO.astro";
+import Footer from "../components/Footer.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import { SITE_URL } from "../consts/site";
@@ -38,9 +39,7 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });
       </div>
     </main>
 
-    <footer class="border-t border-white/10 py-6 text-center text-sm text-zinc-500">
-      <p>© {new Date().getFullYear()} All rights reserved.</p>
-    </footer>
+    <Footer />
 
     <ContactCTA />
 
