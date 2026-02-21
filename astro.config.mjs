@@ -6,4 +6,5 @@ export default defineConfig({
   site: "https://seo-template-eta.vercel.app",
   build: { format: "directory" },
   integrations: [sitemap(), tailwind()],
+  trailingSlash: "always"
 });
