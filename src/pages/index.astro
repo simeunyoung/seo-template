@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE_URL } from "../consts/site";
+import { Image } from "astro:assets";
+import popularImg from "../assets/images/popular-01.jpg";
 
 const title = "강알남";
 const description = "강남 지역 서비스 인사말 placeholder.";
@@ -20,7 +22,7 @@ const canonical = `${SITE_URL}/`;
       
       <!-- 이미지 -->
     <div class="w-full sm:w-28 shrink-0 overflow-hidden rounded-xl">
-      <img src="/assets/images/popular-01.jpg" alt="Fortnite" class="h-40 sm:h-24 w-full object-cover" />
+      <Image src={popularImg} alt="Fortnite" width={400} height={300} class="h-40 sm:h-24 w-full object-cover" format="webp" />
     </div>
 
       <!-- 설명 -->
