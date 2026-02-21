@@ -1,7 +1,9 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
   site: "https://seo-template-eta.vercel.app",
-  integrations: [sitemap()],
+  build: { format: "directory" },
+  integrations: [sitemap(), tailwind()],
 });

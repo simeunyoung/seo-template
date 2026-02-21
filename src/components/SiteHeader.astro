@@ -1,0 +1,48 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "") || "";
+const items: { slug: string; label: string; href: string }[] = [
+  { slug: "home", label: "홈", href: "/" },
+  { slug: "ilpro", label: "일프로", href: "/gangnam/ilpro/" },
+  { slug: "tenpro", label: "텐프로", href: "/gangnam/tenpro/" },
+  { slug: "tencafe", label: "텐카페", href: "/gangnam/tencafe/" },
+  { slug: "jjeomo", label: "쩜오", href: "/gangnam/jjeomo/" },
+];
+const getCurrent = () => {
+  if (path === "" || path === "/") return "home";
+  const parts = path.split("/").filter(Boolean);
+  return parts[parts.length - 1] || "home";
+};
+const current = getCurrent();
+---
+
+<header
+  class="sticky top-0 z-[9999] h-[100px] min-h-[100px] border-b border-white/10 flex items-center"
+  style="background-color: #252729;"
+  role="banner"
+>
+  <div class="w-full overflow-x-auto overflow-y-hidden [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <nav class="cy-container flex items-center justify-center md:justify-between gap-2 md:gap-4 min-w-max" aria-label="메인 메뉴">
+      <a href="/" class="flex-shrink-0 text-lg md:text-2xl font-bold text-pink-400 hover:text-pink-300 transition-colors">
+        강알남
+      </a>
+      <ul class="flex flex-nowrap items-stretch list-none m-0 gap-0">
+        {items.map((item) => (
+          <li class="flex">
+            <a
+              href={item.href}
+              aria-label={item.label}
+              aria-current={current === item.slug ? "page" : undefined}
+              class:list={[
+                "inline-flex items-center justify-center px-3 py-2 md:px-4 md:py-3 text-base md:text-lg font-medium whitespace-nowrap",
+                "text-zinc-100 transition-colors hover:text-zinc-50 min-h-11 min-w-11",
+                { "!text-pink-400 font-semibold": current === item.slug },
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

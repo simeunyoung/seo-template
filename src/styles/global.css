@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pretendard 로컬 폰트 (public/fonts) */
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Pretendard-Bold.woff2") format("woff2");
+}
+
+/* 이미지 기본 */
+img { max-width: 100%; height: auto; }
+
+@layer base {
+  html {
+    font-family: "Pretendard", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-weight: 500;
+  }
+}
+
+
+@layer components {
+  
+  .cy-container {
+    @apply mx-auto w-full px-4 sm:px-6;
+    max-width: 100%;
+  }
+  @media (min-width: 640px) { .cy-container { max-width: 640px; } }
+  @media (min-width: 768px) { .cy-container { max-width: 768px; } }
+  @media (min-width: 1024px) { .cy-container { max-width: 1024px; } }
+  @media (min-width: 1280px) { .cy-container { max-width: 1280px; } }
+  @media (min-width: 1400px) {
+    .cy-container { max-width: 1320px; padding-left: 1rem; padding-right: 1rem; }
+  }
+
+  /* 콘텐츠 카드(배경/패딩/라운드) - 모바일 우선 */
+  .cy-content {
+    @apply bg-[#27292a] rounded-2xl md:rounded-[23px] p-6 sm:p-8 md:p-10 lg:p-[60px];
+  }
+
+  /* “헤더 아래로 내려오는” 간격: 모바일에서 과하면 손해라 줄이고, 큰 화면에서 110px */
+  .cy-content-offset {
+    @apply mt-16 md:mt-20;
+  }
+  @media (min-width: 1024px) {
+    .cy-content-offset { margin-top: 110px; }
+  }
+
+  /* 섹션도 동일 카드 느낌을 원하면 (원하시는 “콘텐츠 안 섹션들” 규칙) */
+  .cy-section {
+    @apply mt-8 sm:mt-10 lg:mt-14 rounded-2xl bg-[#1f2122]/80 p-5 sm:p-6 lg:p-10;
+  }
+  .cy-section:first-child {
+    margin-top: 0;
+  }
+}

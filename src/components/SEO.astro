@@ -1,0 +1,32 @@
+---
+import { SITE_URL } from "../consts/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** 절대경로 canonical URL */
+  canonical: string;
+  /** OG/Twitter 이미지 경로 (절대경로 또는 상대경로). 상대이면 SITE_URL과 결합 */
+  ogImage?: string;
+}
+
+const { title, description, canonical, ogImage = "/assets/images/logo.png" } = Astro.props;
+const imageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE_URL).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
